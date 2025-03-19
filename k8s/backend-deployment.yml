@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ogh
+  name: backend-deployment-blue
+spec:
+  selector:
+    matchLabels:
+      type: backend
+      deployment: blue
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  minReadySeconds: 10
+  template:
+    metadata:
+      labels:
+        type: backend
+        deployment: blue
+    spec:
+      containers:
+        - name: backend-blue
+          image: gunha0405/k8s_prac:latest
+      terminationGracePeriodSeconds: 0
